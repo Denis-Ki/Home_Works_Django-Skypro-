@@ -66,12 +66,12 @@ class Product(models.Model):
         verbose_name="Дата последнего изменения продукта (записи в БД)",
         help_text="Введите дату последнего изменения продукта (записи в БД)",
     )
-    manufactured_at = models.DateField(
-        blank=True,
-        null=True,
-        verbose_name="Дата производства продукта",
-        help_text="Введите дату производства продукта",
-    )
+    # manufactured_at = models.DateField(
+    #     blank=True,
+    #     null=True,
+    #     verbose_name="Дата производства продукта",
+    #     help_text="Введите дату производства продукта",
+    # )
 
 
     class Meta:
@@ -81,3 +81,4 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+

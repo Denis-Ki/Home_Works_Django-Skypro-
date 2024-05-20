@@ -2,6 +2,7 @@
 from pathlib import Path
 import psycopg2
 import os
+import django
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_dump_load_utf8',
     'catalog',
 ]
 
@@ -97,7 +99,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -119,4 +121,9 @@ STATICFILES_DIRS = (BASE_DIR / 'static',)
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
+
+django.setup()
