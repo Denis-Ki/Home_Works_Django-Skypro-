@@ -72,7 +72,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'catalog',
         'USER': 'postgres', # Пользователь для подключения
-        'PASSWORD': 'post13' # Пароль для этого пользователя
+        'PASSWORD': 'post13', # Пароль для этого пользователя
+        'HOST': '127.0.0.1', # Адрес, на котором развернут сервер БД
+        'PORT': 5432, # Порт, на котором работает сервер БД
     }
 }
 
@@ -124,6 +126,3 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
-
-django.setup()
