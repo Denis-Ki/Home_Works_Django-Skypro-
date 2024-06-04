@@ -51,16 +51,16 @@ class Product(models.Model):
         null=True,
         related_name="products",
     )
-    price_per_purchase = models.IntegerField(
+    price_per_purchase = models.PositiveIntegerField(
         verbose_name="Цена за покупку", help_text="Введите цену",
     )
-    created_at = models.DateField(
+    created_at = models.DateTimeField(
         blank=True,
         null=True,
         verbose_name="Дата создания продукта (записи в БД)",
         help_text="Введите дату создания продукта (записи в БД)",
     )
-    updated_at = models.DateField(
+    updated_at = models.DateTimeField(
         blank=True,
         null=True,
         verbose_name="Дата последнего изменения продукта (записи в БД)",
