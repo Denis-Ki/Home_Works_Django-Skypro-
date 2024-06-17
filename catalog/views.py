@@ -6,17 +6,8 @@ from django.views.generic import ListView, DetailView, TemplateView, CreateView,
 from django.shortcuts import render, get_object_or_404, redirect
 
 
-class ContactView(TemplateView):
-    template_name = 'catalog/contacts.html'
-
-    def post_context_data(self, **kwargs):
-        name = request.POST.get('name')
-        phone = request.POST.get('phone')
-        message = request.POST.get('message')
-        print(name)
-        print(phone)
-        print(message)
-        return render(request, "catalog/contacts.html")
+def contact(request):
+    return render(request, "catalog/contacts.html")
 
 
 class ProductListView(ListView):
@@ -30,6 +21,7 @@ class ProductDetailView(DetailView):
 class BlogListView(ListView):
     model = Blog
 
+
 class BlogDetailView(DetailView):
     model = Blog
 
@@ -42,7 +34,7 @@ class BlogDetailView(DetailView):
 
 class BlogCreateView(CreateView):
     model = Blog
-    fields = ('title', 'content', 'preview', 'is_active')
+    fields = ('title', 'content', 'preview', 'is_active', 'is_published', 'created_at')
     success_url = reverse_lazy('catalog:blog')
 
     def form_valid(self, form):
@@ -55,7 +47,7 @@ class BlogCreateView(CreateView):
 
 class BlogUpdateView(UpdateView):
     model = Blog
-    fields = ('title', 'description', 'image', 'is_active')
+    fields = ('title', 'content', 'preview', 'is_active', 'is_published', 'created_at')
     success_url = reverse_lazy('catalog:blog')
 
     def get_success_url(self):

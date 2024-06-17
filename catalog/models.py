@@ -114,9 +114,18 @@ class Blog(models.Model):
         verbose_name="Дата создания блога",
         help_text="Введите дату создания блога",
     )
-    is_active = models.BooleanField(default=True, verbose_name="Активен")
-    is_published = models.BooleanField(default=True, verbose_name="Опубликован")
-    views_count = models.IntegerField(default=0, verbose_name='просмотры')
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="Активен"
+    )
+    is_published = models.BooleanField(
+        default=True,
+        verbose_name="Опубликован"
+    )
+    views_count = models.PositiveIntegerField(
+        default=0,
+        verbose_name='просмотры'
+    )
 
     class Meta:
         verbose_name = "Блог"

@@ -1,8 +1,11 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
 
 
-<div class="row">
-    <div class="col-6">
-        <div class="card">
+<div class="row row-cols-5 row-cols-sm-5 row-cols-md-1 g-3 ">
+    <div class="container px-1 py-1">
+      <div class="col">
+        <div class="card shadow-sm">
             <div class="card-body">
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -20,3 +23,4 @@
     </div>
 </div>
 
+{% endblock %}

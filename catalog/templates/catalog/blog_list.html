@@ -10,6 +10,7 @@
 
 <div class="row row-cols-5 row-cols-sm-5 row-cols-md-3 g-3 ">
     {% for blog in object_list %}
+    {% if blog.is_published %}
     <div class="container px-2 py-2">
         <div class="col">
 
@@ -24,12 +25,23 @@
                         <div class="btn-group">
                             <a class="btn btn-primary" href="{% url 'catalog:blog_detail' blog.pk %}" role="button">
                                 Подробнее</a>
+                            <a class="btn btn-primary" href="{% url 'catalog:blog_update' blog.pk %}" role="button">
+                                Редактировать</a>
+                             <a class="btn btn-primary" href="{% url 'catalog:blog_delete' blog.pk %}" role="button">
+                                Удалить</a>
                         </div>
                     </div>
+                {% if blog.is_active %}
+                <a class="btn btn-sm btn-outline-dark" href="{% url 'catalog:toggle_activity' blog.pk %}">деактевировать</a>
+                {% else %}
+                <a class="btn btn-sm btn-outline-dark" href="{% url 'catalog:toggle_activity' blog.pk %}">активировать</a>
+                {% endif %}
+
                 </div>
             </div>
         </div>
     </div>
+    {% endif %}
     {% endfor %}
 </div>
 
