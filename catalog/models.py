@@ -66,13 +66,13 @@ class Product(models.Model):
         verbose_name="Дата последнего изменения продукта (записи в БД)",
         help_text="Введите дату последнего изменения продукта (записи в БД)",
     )
+
     # manufactured_at = models.DateField(
     #     blank=True,
     #     null=True,
     #     verbose_name="Дата производства продукта",
     #     help_text="Введите дату производства продукта",
     # )
-
 
     class Meta:
         verbose_name = "Продукт"
@@ -82,3 +82,54 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+
+class Blog(models.Model):
+    title = models.CharField(
+        max_length=50,
+        verbose_name="Заголовок блога",
+        help_text="Введите заголовок блога",
+    )
+    slug = models.CharField(
+        max_length=50,
+        verbose_name="Slug блога",
+        help_text="Введите Slug блога",
+        null=True, blank=True
+    )
+    content = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name="Содержание блога",
+        help_text="Введите содержание блога",
+    )
+    preview = models.ImageField(
+        upload_to="catalog/blog_preview",
+        blank=True,
+        null=True,
+        verbose_name="Изображение",
+        help_text="Загрузите изображение",
+    )
+    created_at = models.DateTimeField(
+        blank=True,
+        null=True,
+        verbose_name="Дата создания блога",
+        help_text="Введите дату создания блога",
+    )
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="Активен"
+    )
+    is_published = models.BooleanField(
+        default=True,
+        verbose_name="Опубликован"
+    )
+    views_count = models.PositiveIntegerField(
+        default=0,
+        verbose_name='просмотры'
+    )
+
+    class Meta:
+        verbose_name = "Блог"
+        verbose_name_plural = "Блоги"
+
+    def __str__(self):
+        return self.title
