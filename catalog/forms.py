@@ -15,7 +15,6 @@ class CategoryForm(ModelForm):
     class Meta:
         model = Category
         fields = "__all__"
-        exclude = ("owner",)
 
 
 class ProductForm(StyleFormMixin, ModelForm):
