@@ -19,7 +19,7 @@ class UserCreateView(CreateView):
     success_url = reverse_lazy('users:login')
 
     def form_valid(self, form):
-        user = form.save()
+        user = form.save(commit=False)
         user.is_active = False
         token = secrets.token_hex(16)
         user.token = token
@@ -47,8 +47,8 @@ def reset_password(request):
         email = request.POST.get('email')
         try:
             user = User.objects.get(email=email)
-            new_password = generate_random_password()
-            user.password = make_password(new_password)
+            new_password = User.objects.make_random_password()
+            user.set_password(new_password)
             user.save()
             send_mail(
                 'Password Reset',
@@ -65,10 +65,13 @@ def reset_password(request):
     return render(request, 'users/reset_password.html', {'error_message': error_message})
 
 
-def generate_random_password(length=12, include_special_chars=True):
-    characters = string.ascii_letters + string.digits
-    if include_special_chars:
-        characters += string.punctuation
+def logout(request):
+    return redirect('users:login')
 
-    password = ''.join(secrets.choice(characters) for i in range(length))
-    return password
+# def generate_random_password(length=12, include_special_chars=True):
+#     characters = string.ascii_letters + string.digits
+#     if include_special_chars:
+#         characters += string.punctuation
+#
+#     password = ''.join(secrets.choice(characters) for i in range(length))
+#     return password
