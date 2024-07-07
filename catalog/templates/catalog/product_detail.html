@@ -20,7 +20,23 @@
               <a class="btn btn-primary" href="{% url 'catalog:index'  %}" role="button"> Назад</a>
             </div>
           </div>
+<div class="col-6">
+            <div class="card ">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Верси товара</h4>
+                </div>
+                <div class="card-body">
 
+
+                    {% for version in versions %}
+                    <h5>Название версии: {{ version.name_version }} </h5>
+                    <h5>Версия: {{ version.number_version }}</h5>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+        </div>
         </div>
       </div>
     </div>
