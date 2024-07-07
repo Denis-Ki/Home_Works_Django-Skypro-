@@ -3,28 +3,40 @@
 {% load my_tags %}
 
 <div class="row row-cols-5 row-cols-sm-5 row-cols-md-3 g-3 ">
-  <div class="container px-3 py-3">
-    <div class="col">
-      <div class="card shadow-sm">
-        <img src={{ product.preview | mymedia}}>
-        </svg>
-        <div class="card-body">
-          <h5 class="card text-center"> {{ object.name }}</h5>
-          <p class="card-text"> Описание: {{ object.description }}</p>
-          <p class="card-text"> Категория товара: {{ object.category }}</p>
-          <p class="card-text"> Цена: {{ object.price_per_purchase }} руб.</p>
-          <p class="card-text"> Время добавления: {{ object.created_at }} </p>
-          <p class="card-text"> Время последнего изменения: {{ object.updated_at }} </p>
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="btn-group">
-              <a class="btn btn-primary" href="{% url 'catalog:index'  %}" role="button"> Назад</a>
+    <div class="container px-3 py-3">
+        <div class="col">
+            <div class="card shadow-sm">
+                <img src={{ product.preview | mymedia}}>
+                </svg>
+                <div class="card-body">
+                    <h5 class="card text-center"> {{ object.name }}</h5>
+                    <p class="card-text"> Описание: {{ object.description }}</p>
+                    <p class="card-text"> Категория товара: {{ object.category }}</p>
+                    <p class="card-text"> Цена: {{ object.price_per_purchase }} руб.</p>
+                    <p class="card-text"> Время добавления: {{ object.created_at }} </p>
+                    <p class="card-text"> Время последнего изменения: {{ object.updated_at }} </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a class="btn btn-primary" href="{% url 'catalog:index'  %}" role="button"> Назад</a>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card ">
+                            <div class="card-header">
+                                <h6 class="my-0 font-weight-normal">Верси товара</h6>
+                            </div>
+                            <div class="card-body">
+                                {% for version in versions %}
+                                <p class="card-text"> Название версии: {{ version.name_version }} </p>
+                                <p class="card-text"> Версия: {{ version.number_version }} </p>
+                                {% endfor %}
+                           </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 {% endblock %}
