@@ -2,16 +2,19 @@ import secrets
 import string
 
 from django.conf import settings
+from django.contrib.auth import logout
 from django.contrib.auth.hashers import make_password
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy, reverse
+from django.views import View
 from django.views.generic import CreateView
 
 from users.forms import UserRegisterForm
 from users.models import User
 
 from config.settings import EMAIL_HOST_USER
+
 
 class UserCreateView(CreateView):
     model = User
@@ -64,9 +67,6 @@ def reset_password(request):
 
     return render(request, 'users/reset_password.html', {'error_message': error_message})
 
-
-def logout(request):
-    return redirect('users:login')
 
 # def generate_random_password(length=12, include_special_chars=True):
 #     characters = string.ascii_letters + string.digits
