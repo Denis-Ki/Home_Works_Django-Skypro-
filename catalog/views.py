@@ -1,5 +1,6 @@
 from urllib import request
 
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import inlineformset_factory
 from django.urls import reverse_lazy,  reverse
 # from pytils.translit import slugify
@@ -23,7 +24,7 @@ class ProductListView(ListView):
     model = Product
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
 
     def get_context_data(self, **kwargs):
@@ -31,7 +32,8 @@ class ProductDetailView(DetailView):
         context['versions'] = Version.objects.filter(product=self.object, is_activ_version=True)
         return context
 
-class ProductCreateView(CreateView):
+
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:index')
@@ -53,7 +55,7 @@ class ProductCreateView(CreateView):
         return super().form_valid(form)
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:index')
@@ -82,7 +84,7 @@ class ProductUpdateView(UpdateView):
             return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:index')
 

@@ -6,7 +6,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
+                {% if user.is_authenticated %}
                 <a class="btn btn-sm btn-outline-dark" href="{% url 'catalog:product_create' %}">добавить продукт </a>
+                {% endif %}
             </div>
         </div>
     </div>

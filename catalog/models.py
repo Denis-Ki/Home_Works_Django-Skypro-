@@ -1,5 +1,7 @@
 from django.db import models
 
+from users.models import User
+
 
 class Category(models.Model):
     name = models.CharField(
@@ -71,6 +73,13 @@ class Product(models.Model):
     is_active = models.BooleanField(
         default=True,
         verbose_name="Активен"
+    )
+
+    owner = models.ForeignKey(
+        User,
+        verbose_name="Пользователь",
+        blank=True, null=True,
+        on_delete=models.SET_NULL
     )
 
     # manufactured_at = models.DateField(
