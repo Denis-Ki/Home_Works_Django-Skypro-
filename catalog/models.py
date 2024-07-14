@@ -82,6 +82,8 @@ class Product(models.Model):
         on_delete=models.SET_NULL
     )
 
+    is_published = models.BooleanField(default=False)
+
     # manufactured_at = models.DateField(
     #     blank=True,
     #     null=True,
@@ -93,6 +95,11 @@ class Product(models.Model):
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
         ordering = ["name"]
+        permissions = (
+            ('can_unpublish_product', 'Can unpublish product'),
+            ('change_product_description', 'Can change product description'),
+            ('change_product_category', 'Can change product category'),
+        )
 
     def __str__(self):
         return self.name
