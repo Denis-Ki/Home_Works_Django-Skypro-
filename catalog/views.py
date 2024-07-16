@@ -12,6 +12,8 @@ from django.views.generic import ListView, DetailView, TemplateView, CreateView,
 from django.shortcuts import render, get_object_or_404, redirect
 from django import forms
 
+from catalog.service import get_products_from_cache, get_categories_from_cache
+
 
 def get_success_url(self):
     return reverse('catalog:product', args=[self.kwargs.get('pk')])
@@ -23,6 +25,9 @@ def contact(request):
 
 class ProductListView(ListView):
     model = Product
+
+    def get_queryset(self):
+        return get_products_from_cache()
 
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
@@ -152,3 +157,10 @@ def toggle_activity(request, pk):
 
     blog_item.save(update_fields=['is_active'])
     return redirect(reverse('catalog:blog'))
+
+
+class CategoryListView(ListView):
+    model = Category
+
+    def get_queryset(self):
+        return get_categories_from_cache()
